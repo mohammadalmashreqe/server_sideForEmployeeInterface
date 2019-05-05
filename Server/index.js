@@ -41,13 +41,18 @@ io.on('connection', (socket) => {
 });
 
 io.on('Serve-Tickets', () => {
-
+try {
     TicketsList.splice(0,1);
 
     
     //here i want to tell rabbit q about what happens .
 
     updateTickitsList();
+}
+catch(err)
+{
+    console.log(err);
+}
 });
 /**
  *listen to the request  
