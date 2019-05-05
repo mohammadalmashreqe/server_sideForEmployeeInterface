@@ -3,6 +3,8 @@ let app = express();
 const TicketsList = new Array();
 TicketsList.push("A001");
 TicketsList.push("A002");
+TicketsList.push("A003");
+TicketsList.push("A004");
 let http = require('http');
 let server = http.Server(app);
 
@@ -24,7 +26,7 @@ io.on('connection', (socket) => {
     io.emit("UpadteList", TicketsList);
     socket.on('Serve-Tickets', () => {
 
-        TicketsList.splice(TicketsList.length-1,1);
+        TicketsList.splice(0,1);
         
         //here i want to tell rabbit q about what happens .
 
@@ -40,7 +42,8 @@ io.on('connection', (socket) => {
 
 io.on('Serve-Tickets', () => {
 
-    TicketsList.splice(TicketsList.length()-1,1);
+    TicketsList.splice(0,1);
+
     
     //here i want to tell rabbit q about what happens .
 
