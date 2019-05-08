@@ -18,37 +18,9 @@ let io = socketIO(server);
 app.get("/serveTicket", (req, res) => {
     try {
       
-     //   io.emit("UpadteList", TicketsList);
-        //save tickits in Rabbit Message Queue 
-        //produceTickitsToMQ(TicketsList[TicketsList.length - 1]);
-        console.log("serve from server side");
-res.send("HI");
-        }
-    catch (err) {
-        console.log(err);
-    }
-});
+        
 
-
-
-
-
-
-
-/**
- *Port Number
- *
- */
-const port = process.env.PORT || 8124;
-/**
- *event fires when user connect 
- *
- */
-io.on('connection', (socket) => {
-    try {
-    console.log('Emplyee connected');
-      
-    amqp.connect('amqp://localhost', function(error0, connection) {
+      amqp.connect('amqp://localhost', function(error0, connection) {
         if (error0) {
           throw error0;
         }
@@ -83,6 +55,33 @@ io.on('connection', (socket) => {
           });
         });
       });
+
+      io.emit("UpadteList", TicketsList); }
+    catch (err) {
+        console.log(err);
+    }
+});
+
+
+
+
+
+
+
+/**
+ *Port Number
+ *
+ */
+const port = process.env.PORT || 8124;
+/**
+ *event fires when user connect 
+ *
+ */
+io.on('connection', (socket) => {
+    try {
+    console.log('Emplyee connected');
+      
+   
    io.emit("UpadteList", TicketsList);
  
     }
